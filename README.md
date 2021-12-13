@@ -1,1 +1,1 @@
-# discordBartenderBot
+# Discord bartender bot
