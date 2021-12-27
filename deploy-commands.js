@@ -3,11 +3,12 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, token } = require('./config.json');
-// const token = process.env.TOKEN;
+const { clientId } = require('./config.json');
+const token = process.env.TOKEN;
 
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
+	new SlashCommandBuilder().setName('pingus').setDescription('pongus'),
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
 	new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
 ]
