@@ -1,3 +1,5 @@
+# Dependencies
+node_modules/
+
+# environment variable files
 .env
-node_modules
-config.json
