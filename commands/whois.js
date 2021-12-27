@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
@@ -6,13 +7,35 @@ module.exports = {
 		.setDescription('Look up info about a user.')
 		.addUserOption(option => option.setName('target').setDescription('The user')),
 	async execute(interaction) {
-		const user = interaction.options.getUser('target');
-		
+		let user = interaction.options.getUser('target');
+		let guildMember;
 		if (user) {
-			const guildMember = await interaction.guild.members.fetch(user.id);
-			await interaction.reply(`Name: ${guildMember.displayName} (${user.tag})\nID: ${user.id}`);
+			guildMember = await interaction.guild.members.fetch(user.id);
 		} else {
-			await interaction.reply(`Your Name: ${interaction.member.displayName} (${interaction.user.tag}) \nYour ID: ${interaction.user.id}`);
+			guildMember = interaction.member;
+			user = interaction.user;
 		}
+
+		const myEmbed = new MessageEmbed()
+			// TODO: Implement server colors and use it here
+			// .setColor()
+			.setTitle('User info')
+			.setDescription(`Info about <@${user.id}>`)
+			.setThumbnail(user.avatarURL())
+			.addFields(
+				{ name: 'Name', value: `${guildMember.displayName} (${user.tag})`, inline: false },
+				// TODO: Implement level system and system nickname
+				// Original: 'Server level'
+				{ name: 'Braincells lost', value: `0`, inline: true },
+				// Blank field
+				// { name: '\u200B', value: '\u200B' },
+				// TODO: Implement commands called system and system nickname
+				// Original: 'Commands called'
+				{ name: 'Drinks ordered', value: `0`, inline: true }
+			)
+			.setTimestamp()
+			.setFooter(`Requested by ${interaction.user.tag}`, interaction.user.avatarURL());
+
+		await interaction.reply({ embeds: [myEmbed] });
 	}
 };
