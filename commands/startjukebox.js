@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('mozaert')
-		.setDescription('Mozaert play something please.')
+		.setName('startjukebox')
+		.setDescription('Start playing the jukebox.')
 		.addSubcommand(subcommand =>
 			subcommand
 				.setName('url')
@@ -16,7 +16,9 @@ module.exports = {
 		if (interaction.options.getSubcommand() !== 'url') await interaction.reply('Please specify a YouTube video URL.');
 		// const url = interaction.options.get
 
-		// youtube downloader
+		// YouTube downloader
 		const ytdl = require('ytdl-core');
+
+		
 	}
 };
