@@ -2,6 +2,9 @@
 	"name": "discordbartenderbot",
 	"version": "1.0.0",
 	"description": "",
+	"engines": {
+		"node": "16.x"
+	},
 	"main": "index.js",
 	"scripts": {
 		"setup": "npm install && echo \"Must add DISCORD_TOKEN to .env file or Environment Variables\"",
@@ -22,6 +25,7 @@
 	"dependencies": {
 		"@discordjs/builders": "^0.10.0",
 		"@discordjs/rest": "^0.2.0-canary.0",
+		"@discordjs/voice": "^0.7.5",
 		"discord-api-types": "^0.26.0",
 		"discord.js": "^13.4.0",
 		"dotenv": "^10.0.0",
