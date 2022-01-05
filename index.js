@@ -6,7 +6,10 @@ const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const token = process.env.DISCORD_TOKEN;
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES] });
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+});
 
 // Register events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
