@@ -12,8 +12,8 @@ module.exports = {
 				.setDescription('Make the jukebox play a YouTube video.')
 				.addStringOption(option =>
 					option.setName('url')
-						  .setDescription('YouTube video URL')
-						  .setRequired(true)
+						.setDescription('YouTube video URL')
+						.setRequired(true)
 				)
 		)
 		.addSubcommand(subcommand =>
@@ -28,31 +28,31 @@ module.exports = {
 				return;
 			}
 			const url = interaction.options.getString('url');
-			const stream = ytdl(url, {filter: 'audioonly'});
+			const stream = ytdl(url, { filter: 'audioonly' });
 			const resource = Discord.createAudioResource(stream);
 			const player = Discord.createAudioPlayer();
-	
+
 			const channel = interaction.member.voice.channel;
 			if (!channel) {
 				await interaction.reply('You must be in a voice channel to play the jukebox.')
 				return;
 			}
-	
+
 			const connection = Discord.joinVoiceChannel({
 				channelId: channel.id,
 				guildId: interaction.guildId,
 				adapterCreator: interaction.guild.voiceAdapterCreator
 			});
-			
+
 			// Play jukebox
 			player.play(resource);
 			connection.subscribe(player);
-	
+
 			// Destroy when done
 			player.on(Discord.AudioPlayerStatus.Idle, () => {
 				connection.destroy();
 			});
-	
+
 			await interaction.reply(`Started playing ${url} on the jukebox.`);
 		} else if (interaction.options.getSubcommand() === 'pause') {
 			const connection = Discord.getVoiceConnection(interaction.member.guild.id);

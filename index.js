@@ -1,5 +1,4 @@
-//							franks bot
-
+// franks bot
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 const fs = require('fs');

@@ -19,22 +19,24 @@ module.exports = {
 		const myEmbed = new MessageEmbed()
 			// TODO: Implement server colors and use it here
 			// .setColor()
-			.setTitle('User info')
-			.setDescription(`Info about <@${user.id}>`)
+			.setTitle(`${guildMember.displayName}`)
+			.setDescription(`Profile: <@${user.id}>`)
 			.setThumbnail(user.avatarURL())
 			.addFields(
-				{ name: 'Name', value: `${guildMember.displayName} (${user.tag})`, inline: false },
+				{ name: 'Tag', value: `${user.tag}`, inline: false },
 				// TODO: Implement level system and system nickname
 				// Original: 'Server level'
-				{ name: 'Braincells lost', value: `0`, inline: true },
+				// { name: 'Braincells lost', value: `0`, inline: true },
+
 				// Blank field
 				// { name: '\u200B', value: '\u200B' },
+
 				// TODO: Implement commands called system and system nickname
 				// Original: 'Commands called'
-				{ name: 'Drinks ordered', value: `0`, inline: true }
+				// { name: 'Drinks ordered', value: `0`, inline: true }
 			)
 			.setTimestamp()
-			.setFooter(`Requested by ${interaction.user.tag}`, interaction.user.avatarURL());
+			// .setFooter({text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.avatarURL()});
 
 		await interaction.reply({ embeds: [myEmbed] });
 	}
